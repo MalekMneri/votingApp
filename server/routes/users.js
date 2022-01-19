@@ -3,10 +3,10 @@ var router = express.Router();
 var User = require("../models/User");
 
 /* GET users listing. */
-router.get("/register", function (req, res, next) {
+router.post("/register", function (req, res, next) {
   const user = new User({
-    Username: req.body.Username,
-    Password: hashedPassword,
+    Username: req.body.username,
+    Password: req.body.password,
   });
   try {
     user.save();
@@ -18,14 +18,14 @@ router.get("/register", function (req, res, next) {
 
 // login route
 router.post("/login", function (req, res, next) {
-  User.findOne({ Username: req.body.Username }, function (err, user) {
+  User.findOne({ Username: req.body.username }, function (err, user) {
     if (err) {
       res.send("Error" + err);
     }
     if (!user) {
       res.send("User not found");
     }
-    if (user.Password === req.body.Password) {
+    if (user.Password === req.body.password) {
       res.send("Login successful");
     } else {
       res.send("Incorrect password");

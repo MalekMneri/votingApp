@@ -14,6 +14,7 @@ var sujetsRouter = require("./routes/sujets");
 
 var app = express();
 
+app.listen(3000, () => console.log("Example app listening on port 3000!"));
 //connect to mongodb
 mongoose
   .connect(config.mongo.uri, {
